@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Immersive History: Gettysburg Decision Point</title>
+<style>
+body{font-family:Arial,sans-serif;line-height:1.6;margin:0;background:#f4f6f8;color:#20252b}
+.container{max-width:900px;margin:auto;padding:28px}.card{background:white;border-radius:14px;padding:24px;margin:18px 0;box-shadow:0 2px 10px #0001}
+h1{color:#263b53}h2{color:#34495e}button{background:#263b53;color:white;border:0;border-radius:8px;padding:11px 16px;margin:5px;cursor:pointer}
+button:focus{outline:3px solid #9cc5e5}.option{display:block;width:100%;text-align:left;background:#eef3f7;color:#20252b}
+.feedback{display:none;padding:14px;border-left:5px solid #4c7a9e;background:#eef6fb;margin-top:12px}
+textarea{width:100%;padding:10px;margin:6px 0;border:1px solid #aaa;border-radius:6px;box-sizing:border-box}
+.progress{background:#ddd;border-radius:10px;height:12px}.bar{background:#4c7a9e;height:12px;border-radius:10px;width:0}
+.small{font-size:.92rem;color:#555}
+</style></head><body><div class="container">
+<div class="card"><h1>Immersive History: Gettysburg Decision Point</h1>
+<p><strong>Purpose:</strong> Interactive preparation and reflection for a VR historical field trip.</p>
+<p><strong>Learning objective:</strong> Learners will explain how terrain, military objectives, and leadership decisions shaped the Battle of Gettysburg and justify a historically supported interpretation.</p>
+<div class="progress"><div id="bar" class="bar"></div></div></div>
+
+<div class="card"><h2>1. Prepare for the Virtual Field Trip</h2>
+<p>Before entering a VR experience of Gettysburg, consider why historians study terrain. Physical environments can influence movement, visibility, defensive positions, communication, and strategic choices.</p>
+<p><strong>Think:</strong> What information would you need to analyze a battlefield?</p>
+<button onclick="show('prep')">Reveal checklist</button><div id="prep" class="feedback">
+<ul><li>Terrain and elevation</li><li>Roads and movement routes</li><li>Locations of major units and objectives</li><li>Primary-source evidence</li><li>Multiple perspectives</li></ul></div></div>
+
+<div class="card"><h2>2. Explore: What Should You Notice?</h2>
+<p>Which observation would be most useful for explaining a military decision?</p>
+<button class="option" onclick="answer('q1',false)">A. The weather alone</button>
+<button class="option" onclick="answer('q1',true)">B. Elevation, visibility, and movement routes</button>
+<button class="option" onclick="answer('q1',false)">C. How attractive the landscape looks</button>
+<div id="q1" class="feedback"></div></div>
+
+<div class="card"><h2>3. Decision Point</h2>
+<p>A VR simulation shows that a high position provides improved visibility and a stronger defensive advantage. Which conclusion is best supported?</p>
+<button class="option" onclick="answer('q2',true)">A. Terrain can shape strategic options and influence leadership decisions.</button>
+<button class="option" onclick="answer('q2',false)">B. Terrain determines the outcome of every battle.</button>
+<button class="option" onclick="answer('q2',false)">C. Technology removes the need for historical evidence.</button>
+<div id="q2" class="feedback"></div></div>
+
+<div class="card"><h2>4. Primary-Source Connection</h2>
+<p>After the VR experience, compare what you observed with a primary source such as a soldier's account, map, speech, or official report.</p>
+<label for="reflection"><strong>Reflection:</strong> What did the immersive experience help you understand, and what could a primary source add that VR alone cannot?</label>
+<textarea id="reflection" rows="5" placeholder="Type your response here..."></textarea>
+<button onclick="saveReflection()">Check My Reflection</button><div id="reflectionFeedback" class="feedback"></div></div>
+
+<div class="card"><h2>5. Exit Ticket</h2><p><strong>The most important benefit of using VR for historical learning is...</strong></p>
+<textarea id="exit" rows="3" placeholder="Type one or two sentences..."></textarea>
+<button onclick="saveExit()">Submit Exit Ticket</button><div id="exitFeedback" class="feedback"></div>
+<p class="small">Accessibility: Keyboard-friendly, readable contrast, text-based alternatives, and no headset required to complete the learning task.</p></div>
+</div>
+<script>
+let completed=0;function update(){completed=Math.min(completed+1,5);document.getElementById('bar').style.width=(completed/5*100)+'%'}
+function show(id){document.getElementById(id).style.display='block';update()}
+function answer(id,correct){const e=document.getElementById(id);e.style.display='block';e.innerHTML=correct?'<strong>Correct.</strong> This connects the virtual environment to historical reasoning and evidence.':'<strong>Try again.</strong> Focus on information that helps explain movement, visibility, objectives, or strategy.';if(correct)update()}
+function saveReflection(){const v=document.getElementById('reflection').value.trim(),e=document.getElementById('reflectionFeedback');e.style.display='block';e.innerHTML=v.length>30?'<strong>Good reflection.</strong> You connected VR to the value of primary-source evidence.':'Add more detail about what VR showed and what a primary source could add.';if(v.length>30)update()}
+function saveExit(){const v=document.getElementById('exit').value.trim(),e=document.getElementById('exitFeedback');e.style.display='block';e.innerHTML=v.length>15?'<strong>Exit ticket recorded.</strong> Use your response for discussion.':'Add a little more detail so your learning is clear.';if(v.length>15)update()}
+</script></body></html>
